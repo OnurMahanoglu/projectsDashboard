@@ -2,39 +2,58 @@
   width: 100%;
   min-height: 100vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
   background: #ffffff;
+  padding-top: 60px; 
+  box-sizing: border-box;
+}
+
+.trt-logo {
+  width: 140px;
+  height: auto;
+  margin-bottom: 80px; 
 }
 
 .home-buttons {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 320px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: nowrap;
 }
 
 .btn {
-  padding: 16px;
+  width: 220px;
+  height: 220px;
+  flex-shrink: 0;      
+  box-sizing: border-box; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: none;
-  border-radius: 12px;
-  font-size: 18px;
+  border-radius: 20px;
+  font-size: 22px;
   font-weight: bold;
   cursor: pointer;
   transition: .2s;
 }
 
 .btn:hover {
-  transform: translateY(-2px);
+  transform: translateY(-4px);
 }
 
 .btn-primary {
   background: #e4002b;
   color: white;
+  box-shadow: 0 10px 25px -8px rgba(228, 0, 43, 0.5);
 }
 
 .btn-primary:hover {
   background: #c60025;
+  box-shadow: 0 14px 30px -8px rgba(228, 0, 43, 0.6);
 }
 
 .btn-outline {
@@ -45,4 +64,22 @@
 
 .btn-outline:hover {
   background: #fff1f4;
+}
+
+
+@media (max-width: 500px) {
+  .home-buttons {
+    gap: 16px;
+  }
+
+  .btn {
+    width: 140px;
+    height: 140px;
+    font-size: 16px;
+  }
+
+  .trt-logo {
+    width: 100px;
+    margin-bottom: 50px;
+  }
 }
