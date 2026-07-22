@@ -1,6 +1,9 @@
 export interface SideItem {
+    id: string;
     title: string;
     path?: string;
+    icon?: React.ReactNode;
+    badge?: string | number;
     children?: SideItem[];
 }
 
