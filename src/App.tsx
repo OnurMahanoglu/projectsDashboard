@@ -1,26 +1,14 @@
-import { useState } from 'react'
-import './App.css'
-
-const initialProjects = [
-  { id: 'PRJ-01', name: 'Aroma A Projesi', startDate: '10 Oca 2026', endDate: '15 Haz 2026', status: 'Aktif' },
-  { id: 'PRJ-02', name: 'Aroma B Projesi', startDate: '01 Şub 2026', endDate: '20 Tem 2026', status: 'Beklemede' },
-  { id: 'PRJ-03', name: 'Beyaz A Bandrolü', startDate: '05 Mar 2026', endDate: '10 Ağu 2026', status: 'Aktif' },
-  { id: 'PRJ-04', name: 'Beyaz B Bandrolü', startDate: '12 Nis 2026', endDate: '01 Eyl 2026', status: 'Tamamlandı' },
-  { id: 'PRJ-05', name: 'Cihaz Yönetim Paneli', startDate: '20 May 2026', endDate: '30 Eki 2026', status: 'Aktif' },
-]
+import { useState } from 'react';
+import { ProjectList } from './pages/ProjectList';
+import './App.css';
 
 function App() {
-  const [searchTerm, setSearchTerm] = useState('')
-
-  const filteredProjects = initialProjects.filter((project) =>
-    project.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    project.id.toLowerCase().includes(searchTerm.toLowerCase())
-  )
+  const [searchTerm, setSearchTerm] = useState('');
 
   return (
     <div className="main-layout">
       <div className="content-container">
-        
+        {/* 1. Header (Arama Barı ve Profil) */}
         <header className="top-header">
           <div className="search-box">
             <svg className="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -51,76 +39,21 @@ function App() {
           </div>
         </header>
 
-        <div className="breadcrumb-wrapper">
-          <nav className="breadcrumb">
-            <a href="#">Anasayfa</a>
-            <span className="separator">/</span>
-            <a href="#">Projeler</a>
-            <span className="separator">/</span>
-            <span className="current">Proje Listesi</span>
-          </nav>
-          <div className="result-count">
-            Toplam <strong>{filteredProjects.length}</strong> kayıt bulundu
-          </div>
+        {/* 2. Sayfa Başlığı ve Açıklaması */}
+        <div className="page-header" style={{ marginBottom: '20px' }}>
+          <h1 style={{ fontSize: '24px', fontWeight: '700', color: '#0f172a', margin: '0 0 4px 0' }}>
+            Proje ve Bandrol Yönetimi
+          </h1>
+          <p style={{ fontSize: '14px', color: '#64748b', margin: 0 }}>
+            Sistemde kayıtlı aktif projeleri, bandrolleri ve durumlarını buradan takip edebilirsiniz.
+          </p>
         </div>
 
-        <main className="table-card">
-          <table className="custom-table">
-            <thead>
-              <tr>
-                <th>KODU</th>
-                <th>PROJE / BANDROL ADI</th>
-                <th>BAŞLANGIÇ</th>
-                <th>BİTİŞ</th>
-                <th>DURUM</th>
-                <th style={{ textAlign: 'right' }}>İŞLEMLER</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredProjects.length > 0 ? (
-                filteredProjects.map((project) => (
-                  <tr key={project.id}>
-                    <td>
-                      <span className="badge-id">{project.id}</span>
-                    </td>
-                    <td className="project-name">{project.name}</td>
-                    <td className="date-text">{project.startDate}</td>
-                    <td className="date-text">{project.endDate}</td>
-                    <td>
-                      <span className={`status-badge ${
-                        project.status === 'Aktif' ? 'active' :
-                        project.status === 'Tamamlandı' ? 'completed' : 'pending'
-                      }`}>
-                        {project.status}
-                      </span>
-                    </td>
-                    <td style={{ textAlign: 'right' }}>
-                      <button className="btn-detail">
-                        <span>İncele</span>
-                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2">
-                          <polyline points="9 18 15 12 9 6"></polyline>
-                        </svg>
-                      </button>
-                    </td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan={6} className="no-result">
-                    <div className="empty-state">
-                      <span>🔍</span>
-                      <p>Aramanızla eşleşen hiçbir proje bulunamadı.</p>
-                    </div>
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </main>
-
+        {/* 3. Sayfa İçeriği */}
+        <ProjectList searchTerm={searchTerm} />
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
