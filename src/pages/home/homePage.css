@@ -1,0 +1,48 @@
+.home-buttons-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ffffff;
+}
+
+.home-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 320px;
+}
+
+.btn {
+  padding: 16px;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background: #e4002b;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #c60025;
+}
+
+.btn-outline {
+  background: white;
+  color: #e4002b;
+  border: 2px solid #e4002b;
+}
+
+.btn-outline:hover {
+  background: #fff1f4;
+}
