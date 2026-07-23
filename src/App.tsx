@@ -8,7 +8,6 @@ function App() {
   return (
     <div className="main-layout">
       <div className="content-container">
-        {/* 1. Header (Arama Barı ve Profil) */}
         <header className="top-header">
           <div className="search-box">
             <svg className="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -39,7 +38,6 @@ function App() {
           </div>
         </header>
 
-        {/* 2. Sayfa Başlığı ve Açıklaması */}
         <div className="page-header" style={{ marginBottom: '20px' }}>
           <h1 style={{ fontSize: '24px', fontWeight: '700', color: '#0f172a', margin: '0 0 4px 0' }}>
             Proje ve Bandrol Yönetimi
