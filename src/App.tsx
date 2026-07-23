@@ -1,16 +1,32 @@
-import { Routes, Route } from "react-router-dom";
-import Home from "./pages/home/homePage";
+import { Routes, Route, Navigate } from "react-router";
+import { MainLayout } from "./components/layouts/MainLayout.tsx";
+import { HomePage } from "./pages/HomePage.tsx";
+import { ProjectListPage } from "./pages/ProjectListPage.tsx";
+import { ProjectManagePage } from "./pages/ProjectManagePage.tsx";
+import { AccountSettingsPage } from "./pages/AccountSettingPage.tsx";
+import { LogoutPage } from "./pages/LogoutPage.tsx";
 import Login from "./components/login/login";
-import Projects from "./components/projects/projects";
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/projects" element={<Projects />} />
+      <Route
+        path="/*"
+        element={
+          <MainLayout>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/projeler/liste" element={<ProjectListPage />} />
+              <Route path="/projeler/yonetim" element={<ProjectManagePage />} />
+              <Route path="/hesap/ayarlar" element={<AccountSettingsPage />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </MainLayout>
+        }
+      />
+      <Route path="/cikis" element={<LogoutPage />} />
+      <Route path="/giris" element={<Login />} />
     </Routes>
   );
 }
-
 export default App;
