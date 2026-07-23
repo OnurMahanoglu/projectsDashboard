@@ -1,16 +1,16 @@
-import "./homePage.css";
-import { useNavigate } from "react-router-dom";
+import styles from "./homePage.module.css";
+import { useNavigate } from "react-router";
 import trtLogo from "../../assets/trt-logo.webp"; 
 
 function Home() {
   const navigate = useNavigate();
 
   return (
-    <div className="home-buttons-wrapper">
-      <img src={trtLogo} alt="TRT Logo" className="trt-logo" />
-      <div className="home-buttons">
-        <button className="btn btn-primary" onClick={() => navigate("/login")}>Giriş Yap</button>
-        <button className="btn btn-outline" onClick={() => navigate("/projects")}>Projeler</button>
+    <div className={styles.homeButtonsWrapper}>
+      <img src={trtLogo} alt="TRT Logo" className={styles.trtLogo} />
+      <div className={styles.homeButtons}>
+        <button className={`${styles.btn} ${styles.btnPrimary}`} onClick={() => navigate("/login")}>Giriş Yap</button>
+        <button className={`${styles.btn} ${styles.btnOutline}`} onClick={() => navigate("/projects")}>Projeler</button>
       </div>
     </div>
   );
