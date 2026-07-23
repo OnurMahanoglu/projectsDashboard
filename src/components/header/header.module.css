@@ -1,0 +1,32 @@
+.header {
+    height: 60px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.headerTitle {
+    font-weight: 600;
+    font-size: 16px;
+    color: #0f172a;
+}
+
+.headerRight {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 14px;
+    color: #64748b;
+}
+
+.placeholderItem,
+.placeholderUser {
+    padding: 6px 12px;
+    background-color: #f1f5f9;
+    border-radius: 6px;
+}
