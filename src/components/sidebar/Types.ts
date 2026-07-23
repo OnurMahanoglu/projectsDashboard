@@ -11,3 +11,7 @@ export interface SideItemProps {
     item: SideItem;
     isCollapsed: boolean;
 }
+
+export interface MainLayoutProps {
+    children: React.ReactNode;
+}

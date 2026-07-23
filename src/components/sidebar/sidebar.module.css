@@ -110,7 +110,7 @@
 
 .sidebarItem:hover,
 .sidebarItemHeader:hover {
-    background-color: #f1f5f9;
+    background-color: #cacfd4;
     color: #0f172a;
 }
 
@@ -181,7 +181,7 @@
 }
 
 .sidebarSubItem:hover {
-    background-color: #f8fafc;
+    background-color: #cacfd4;
     color: #0f172a;
 }
 

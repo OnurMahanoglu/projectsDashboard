@@ -1,0 +1,21 @@
+/* src/components/layout/mainLayout.module.css */
+
+.layoutContainer {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    /* 👈 100vw YERİNE 100% (Yatay kaydırmayı kesin engeller) */
+    background-color: #f8fafc;
+    box-sizing: border-box;
+}
+
+.mainContent {
+    flex: 1;
+    padding: 32px;
+    box-sizing: border-box;
+    /* 👈 Padding'lerin genişliği taşırmasını engeller */
+    min-width: 0;
+    /* 👈 Flex çocuklarının ekrandan taşmasını önleyen kritik ayar */
+    overflow-y: auto;
+    /* İçerik çok uzarsa sadece içerik alanı dikey kaydırılır */
+}
