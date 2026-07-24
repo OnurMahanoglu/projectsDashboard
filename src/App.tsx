@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router";
+import { Routes, Route, Navigate, BrowserRouter } from "react-router";
 import { MainLayout } from "./components/layouts/MainLayout.tsx";
 import { ProjectListPage } from "./pages/ProjectListPage.tsx";
 import { ProjectManagePage } from "./pages/ProjectManagePage.tsx";
@@ -24,6 +24,9 @@ function App() {
                 <Route path="/hesap/ayarlar" element={<AccountSettingsPage />} />
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
+            </MainLayout>}/>
+      </Routes>
+      </BrowserRouter>
   );
 }
 
