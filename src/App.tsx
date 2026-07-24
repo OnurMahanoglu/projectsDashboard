@@ -7,6 +7,7 @@ import { AccountSettingsPage } from "./pages/AccountSettingPage.tsx";
 import { LogoutPage } from "./pages/LogoutPage.tsx";
 import LoginPage from "./pages/login/loginPage";
 import Projects from "./components/projects/projects";
+import Home from "./pages/home/homePage.tsx";
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
           element={
             <MainLayout>
               <Routes>
-                <Route path="/" element={<HomePage />} />
+                <Route path="/" element={<Home />} />
                 <Route path="/projeler/liste" element={<ProjectListPage />} />
                 <Route path="/projeler/yonetim" element={<ProjectManagePage />} />
                 <Route path="/hesap/ayarlar" element={<AccountSettingsPage />} />
