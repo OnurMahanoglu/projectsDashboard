@@ -1,6 +1,5 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router";
+import { Routes, Route, Navigate } from "react-router";
 import { MainLayout } from "./components/layouts/MainLayout.tsx";
-import { HomePage } from "./pages/HomePage.tsx";
 import { ProjectListPage } from "./pages/ProjectListPage.tsx";
 import { ProjectManagePage } from "./pages/ProjectManagePage.tsx";
 import { AccountSettingsPage } from "./pages/AccountSettingPage.tsx";
@@ -25,14 +24,6 @@ function App() {
                 <Route path="/hesap/ayarlar" element={<AccountSettingsPage />} />
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
-            </MainLayout>
-          }
-        />
-
-        {/* Sidebar OLMADAN görünecek bağımsız çıkış sayfası */}
-        <Route path="/cikis" element={<LogoutPage />} />
-      </Routes>
-    </BrowserRouter>
   );
 }
 

@@ -220,8 +220,8 @@
    5. AKTİF DURUM
    ========================================== */
 .active {
-    background-color: #D2272F;
-    color: #ffffff;
+    /* background-color: #D2272F;
+    color: #ffffff; */
 }
 
 .active .iconWrapper,

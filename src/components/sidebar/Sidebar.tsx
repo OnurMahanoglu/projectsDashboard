@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { SidebarItem } from "./SidebarItem.tsx";
 import { renderIcon } from "../../utils/iconMapper.tsx";
-import type { SideItem } from "./types.ts";
+import { SideItem } from "../../types/SideItemProps.ts";
 import styles from "./sidebar.module.css";
 import Logo from "../../assets/trt.png"
 
@@ -24,7 +24,7 @@ export const Sidebar = () => {
                 const formatMenuItems = (items: SideItem[]): SideItem[] => {
                     return items.map((item) => ({
                         ...item,
-                        icon: renderIcon(item.iconName),
+                        icon: renderIcon(item?.iconName),
                         children: item.children ? formatMenuItems(item.children) : undefined,
                     }));
                 };
