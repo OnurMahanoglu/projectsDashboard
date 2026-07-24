@@ -1,6 +1,6 @@
 import styles from "./homePage.module.css";
 import { useNavigate } from "react-router";
-import trtLogo from "../../assets/trt-logo.webp"; 
+import trtLogo from "../../assets/trtLogo.webp"; 
 
 function Home() {
   const navigate = useNavigate();
