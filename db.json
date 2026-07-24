@@ -5,5 +5,56 @@
     { "id": "PRJ-03", "name": "Beyaz A Bandrolü", "startDate": "05 Mar 2026", "endDate": "10 Ağu 2026", "status": "Aktif" },
     { "id": "PRJ-04", "name": "Beyaz B Bandrolü", "startDate": "12 Nis 2026", "endDate": "01 Eyl 2026", "status": "Tamamlandı" },
     { "id": "PRJ-05", "name": "Cihaz Yönetim Paneli", "startDate": "20 May 2026", "endDate": "30 Eki 2026", "status": "Aktif" }
-  ]
+  ],
+    "routes": [
+        {
+            "id": "home",
+            "title": "Anasayfa",
+            "path": "/",
+            "iconName": "Home",
+            "showInSidebar": true
+        },
+        {
+            "id": "projects",
+            "title": "Projeler",
+            "path": "/projeler",
+            "iconName": "Projects",
+            "showInSidebar": true,
+            "children": [
+                {
+                    "id": "project-list",
+                    "title": "Proje Liste",
+                    "path": "/projeler/liste",
+                    "showInSidebar": true
+                },
+                {
+                    "id": "project-manage",
+                    "title": "Proje Yönetimi",
+                    "path": "/projeler/yonetim",
+                    "showInSidebar": true
+                }
+            ]
+        },
+        {
+            "id": "account",
+            "title": "Hesap",
+            "path": "/hesap",
+            "iconName": "Account",
+            "showInSidebar": true,
+            "children": [
+                {
+                    "id": "account-settings",
+                    "title": "Hesap Ayarları",
+                    "path": "/hesap/ayarlar",
+                    "showInSidebar": true
+                },
+                {
+                    "id": "logout",
+                    "title": "Çıkış",
+                    "path": "/cikis",
+                    "showInSidebar": true
+                }
+            ]
+        }
+    ]
 }
