@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { NavLink, useLocation } from "react-router";
-import type { SideItemProps } from "./types.ts";
 import styles from "./sidebar.module.css";
+import SideItemProps  from "../../types/SideItemProps.ts";
 
 export const SidebarItem = ({ item, isCollapsed }: SideItemProps) => {
     const [isOpen, setIsOpen] = useState(false);
