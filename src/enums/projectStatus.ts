@@ -1,7 +1,7 @@
 export const ProjectStatus = {
-  AKTIF: 'Aktif',
-  BEKLEMEDE: 'Beklemede',
-  TAMAMLANDI: 'Tamamlandı',
+  AKTIF: { label: 'Aktif', class: 'status-active' },
+  BEKLEMEDE: { label: 'Beklemede', class: 'status-pending' },
+  TAMAMLANDI: { label: 'Tamamlandı', class: 'status-completed' },
 } as const;
 
-export type ProjectStatusType = typeof ProjectStatus[keyof typeof ProjectStatus];
+export type ProjectStatusType = keyof typeof ProjectStatus;

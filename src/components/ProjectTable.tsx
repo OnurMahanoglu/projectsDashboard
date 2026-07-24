@@ -8,8 +8,8 @@ interface ProjectTableProps {
 
 export const ProjectTable = ({ projects, columns }: ProjectTableProps) => {
   return (
-    <main className="table-card">
-      <table className="custom-table">
+    <div className="table-container">
+      <table className="modern-table">
         <thead>
           <tr>
             {columns.map((col) => (
@@ -27,24 +27,17 @@ export const ProjectTable = ({ projects, columns }: ProjectTableProps) => {
                   if (col.key === 'actions') {
                     return (
                       <td key="actions" style={{ textAlign: 'right' }}>
-                        <button className="btn-detail">
-                          <span>İncele</span>
-                          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2">
-                            <polyline points="9 18 15 12 9 6"></polyline>
-                          </svg>
-                        </button>
+                        <button className="btn-action btn-edit">İncele</button>
                       </td>
                     );
                   }
 
                   if (col.key === 'status') {
+                    const statusInfo = ProjectStatus[project.status];
                     return (
                       <td key={col.key}>
-                        <span className={`status-badge ${
-                          project.status === ProjectStatus.AKTIF ? 'active' :
-                          project.status === ProjectStatus.TAMAMLANDI ? 'completed' : 'pending'
-                        }`}>
-                          {project.status}
+                        <span className={`status-badge ${statusInfo.class}`}>
+                          {statusInfo.label}
                         </span>
                       </td>
                     );
@@ -52,8 +45,8 @@ export const ProjectTable = ({ projects, columns }: ProjectTableProps) => {
 
                   if (col.key === 'id') {
                     return (
-                      <td key={col.key}>
-                        <span className="badge-id">{project.id}</span>
+                      <td key={col.key} className="col-id">
+                        {project.id}
                       </td>
                     );
                   }
@@ -65,15 +58,12 @@ export const ProjectTable = ({ projects, columns }: ProjectTableProps) => {
           ) : (
             <tr>
               <td colSpan={columns.length} className="no-result">
-                <div className="empty-state">
-                  <span>🔍</span>
-                  <p>Aramanızla eşleşen hiçbir proje bulunamadı.</p>
-                </div>
+                Aramanızla eşleşen proje bulunamadı.
               </td>
             </tr>
           )}
         </tbody>
       </table>
-    </main>
+    </div>
   );
 };
