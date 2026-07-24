@@ -1,0 +1,285 @@
+/* ==========================================
+   1. GENEL SIDEBAR KONTEYNERİ
+   ========================================== */
+.sidebar {
+    background-color: #ffffff;
+    color: #0f172a;
+    font-family: system-ui, 'Segoe UI', sans-serif;
+    box-sizing: border-box;
+    user-select: none;
+    border-right: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    padding: 16px 12px;
+    min-height: 100vh;
+    width: 260px;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+/* DARALTILMIŞ DURUM (90px) */
+.sidebar.collapsed {
+    width: 80px;
+    padding: 16px 12px;
+}
+
+/* ==========================================
+   2. HEADER ALANI (LOGO & TOGGLE)
+   ========================================== */
+.sidebarHeader {
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 40px;
+}
+
+/* Logo görselinin boyutu ise her zaman sabit kalır, asla büzüşmez */
+.logo {
+    height: 30px;
+    width: auto;
+    display: block;
+}
+
+.logoWrapper {
+    width: 80px;
+    height: 30px;
+    overflow: hidden;
+    display: block;
+    opacity: 1;
+    transition: opacity 0.2s ease, width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toggleBtn {
+    background: #ffffff;
+    color: #0f172a;
+    border: 1px solid #ffffff;
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-left: auto;
+    margin-right: 0px;
+    transition: margin-right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toggleBtn:hover {
+    background: #f1f5f9;
+    color: #D2272F;
+}
+
+/* ==========================================
+   3. NAVİGASYON VE ELEMANLAR
+   ========================================== */
+.sidebarNav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    width: 100%;
+}
+
+.sidebarItemGroup {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebarItem,
+.sidebarItemHeader {
+    display: flex;
+    align-items: center;
+    padding: 10px 12px;
+    color: #475569;
+    text-decoration: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+    box-sizing: border-box;
+    width: 100%;
+    overflow: hidden;
+    transition: background-color 0.2s ease, color 0.2s ease, padding 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebarItem:hover,
+.sidebarItemHeader:hover {
+    background-color: #cacfd4;
+    color: #0f172a;
+}
+
+.itemLeft {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-width: 0;
+}
+
+.iconWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    color: #0f172a;
+    margin-right: 12px;
+    transition: margin-right 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s ease;
+}
+
+.sidebarItem:hover .iconWrapper,
+.sidebarItemHeader:hover .iconWrapper {
+    color: #D2272F;
+}
+
+.itemTitle {
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 150px;
+    opacity: 1;
+    transition: opacity 0.15s ease, max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.itemRight {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    opacity: 1;
+    max-width: 50px;
+    overflow: hidden;
+    margin-left: auto;
+    transition: opacity 0.15s ease, max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==========================================
+   4. ALT MENÜ STİLLERİ
+   ========================================== */
+.sidebarSubMenu {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 4px;
+    padding-left: 20px;
+}
+
+.sidebarSubItem {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    color: #64748b;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 13.5px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.sidebarSubItem:hover {
+    background-color: #cacfd4;
+    color: #0f172a;
+}
+
+.subIconWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    color: #94a3b8;
+    flex-shrink: 0;
+}
+
+.sidebarSubMenuWrapper {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.sidebarSubMenuWrapper.open {
+    grid-template-rows: 1fr;
+}
+
+.sidebarSubMenu {
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 4px;
+    padding-left: 20px;
+}
+
+/* ==========================================
+   5. AKTİF DURUM
+   ========================================== */
+.active {
+    background-color: #D2272F;
+    color: #ffffff;
+}
+
+.active .iconWrapper,
+.active .subIconWrapper,
+.active .arrow {
+    color: #ffffff;
+}
+
+.active .badge {
+    background-color: #ffffff;
+    color: #2563eb;
+}
+
+.parentOfActive {
+    color: #0f172a !important;
+
+    font-weight: 700 !important;
+
+}
+
+.parentOfActive .iconWrapper {
+    color: #0f172a !important;
+}
+
+/* ==========================================
+   6. COLLAPSED (DARALTILMIŞ) ANİMASYONLARI
+   ========================================== */
+
+.collapsed .logo {
+    opacity: 0;
+    max-width: 0px;
+    pointer-events: none;
+    transition: opacity 0.2s ease, max-width 0s linear 0.2s;
+}
+
+.collapsed .logoWrapper {
+    width: 0px;
+    opacity: 0;
+}
+
+.collapsed .itemTitle,
+.collapsed .itemRight {
+    opacity: 0;
+    max-width: 0px;
+    pointer-events: none;
+}
+
+.collapsed .toggleBtn {
+
+    margin-right: 12px;
+}
+
+
+.collapsed .sidebarItem,
+.collapsed .sidebarItemHeader {
+    padding: 10px 15px;
+}
+
+.collapsed .iconWrapper {
+    margin-right: 0;
+}
