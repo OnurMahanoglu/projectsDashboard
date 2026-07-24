@@ -12,4 +12,10 @@ body {
 *::before,
 *::after {
     box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #ffffff;
+}
+
+button {
+  font: inherit;
 }

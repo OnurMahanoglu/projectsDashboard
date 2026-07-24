@@ -5,6 +5,8 @@ import { ProjectListPage } from "./pages/ProjectListPage.tsx";
 import { ProjectManagePage } from "./pages/ProjectManagePage.tsx";
 import { AccountSettingsPage } from "./pages/AccountSettingPage.tsx";
 import { LogoutPage } from "./pages/LogoutPage.tsx";
+import LoginPage from "./pages/login/loginPage";
+import Projects from "./components/projects/projects";
 
 function App() {
   return (
