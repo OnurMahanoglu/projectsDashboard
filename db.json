@@ -3,7 +3,7 @@
         {
             "id": "home",
             "title": "Anasayfa",
-            "path": "/",
+            "path": "/Anasayfa",
             "iconName": "Home",
             "showInSidebar": true
         },

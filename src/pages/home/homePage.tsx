@@ -10,7 +10,7 @@ function Home() {
       <img src={trtLogo} alt="TRT Logo" className={styles.trtLogo} />
       <div className={styles.homeButtons}>
         <button className={`${styles.btn} ${styles.btnPrimary}`} onClick={() => navigate("/login")}>Giriş Yap</button>
-        <button className={`${styles.btn} ${styles.btnOutline}`} onClick={() => navigate("/projects")}>Projeler</button>
+        <button className={`${styles.btn} ${styles.btnOutline}`} onClick={() => navigate("/projeler/liste")}>Projeler</button>
       </div>
     </div>
   );
