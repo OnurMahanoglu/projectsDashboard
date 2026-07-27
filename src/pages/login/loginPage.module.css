@@ -1,0 +1,16 @@
+.loginPageWrapper {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+
+  background-image:
+    linear-gradient(135deg, rgba(228, 0, 43, 0.55), rgba(138, 0, 25, 0.75)),
+    url("../../assets/loginArkaFon.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}

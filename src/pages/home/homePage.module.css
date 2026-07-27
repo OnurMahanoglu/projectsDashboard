@@ -1,0 +1,85 @@
+.homeButtonsWrapper {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  padding-top: 60px; 
+  box-sizing: border-box;
+}
+
+.trtLogo {
+  width: 140px;
+  height: auto;
+  margin-bottom: 80px; 
+}
+
+.homeButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: nowrap;
+}
+
+.btn {
+  width: 220px;
+  height: 220px;
+  flex-shrink: 0;      
+  box-sizing: border-box; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 20px;
+  font-size: 22px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.btn:hover {
+  transform: translateY(-4px);
+}
+
+.btnPrimary {
+  background: #e4002b;
+  color: white;
+  box-shadow: 0 10px 25px -8px rgba(228, 0, 43, 0.5);
+}
+
+.btnPrimary:hover {
+  background: #c60025;
+  box-shadow: 0 14px 30px -8px rgba(228, 0, 43, 0.6);
+}
+
+.btnOutline {
+  background: white;
+  color: #e4002b;
+  border: 2px solid #e4002b;
+}
+
+.btnOutline:hover {
+  background: #fff1f4;
+}
+
+
+@media (max-width: 500px) {
+  .homeButtons {
+    gap: 16px;
+  }
+
+  .btn {
+    width: 140px;
+    height: 140px;
+    font-size: 16px;
+  }
+
+  .trtLogo {
+    width: 100px;
+    margin-bottom: 50px;
+  }
+}
