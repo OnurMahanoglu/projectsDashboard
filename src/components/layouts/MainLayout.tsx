@@ -1,4 +1,5 @@
 
+import { Outlet } from "react-router";
 import { Sidebar } from "../sidebar/Sidebar";
 import { Header } from "../header/Header";
 import styles from "./mainLayout.module.css";
@@ -10,7 +11,7 @@ export const MainLayout = () => {
             <div className={styles.contentWrapper}>
                 <Header />
                 <main className={styles.mainContent}>
-                    {/* {children} */}
+                    <Outlet />
                 </main>
             </div>
         </div>
