@@ -32,44 +32,77 @@ export const ProjectManagePage = () => {
     const handleDelete = async (id: string) => {
         if (confirm("Bu projeyi silmek istediğinize emin misiniz?")) {
             try {
-                await fetch(`http://localhost:3000/projects/${id}`, {
+                const response = await fetch(`http://localhost:3000/projects/${id}`, {
                     method: "DELETE"
                 });
+                if (!response.ok) {
+                    throw new Error("Proje silinirken bir hata oluştu!");
+                }
+
+                setProjects((prev) => prev.filter((p) => String(p.id) !== String(id)));
+
             } catch (err) {
                 console.error("Proje silinirken bir hata oluştu!");
             }
-            setProjects((prev) => prev.filter((p) => p.id !== id));
         }
     };
 
-    const handleSave = async (e: React.FormEvent) => {
+    const handleUpdate = async () => {
+        if (!editingProject) return;
+
+        try {
+            const response = await fetch(`http://localhost:3000/projects/${editingProject.id}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(editingProject)
+            });
+
+            if (response.ok) {
+                const updatedProject: Project = await response.json();
+                setProjects((prev) =>
+                    prev.map((p) => (p.id === updatedProject.id ? updatedProject : p))
+                );
+            }
+        } catch (err) {
+            console.error("Proje güncellenirken bir sıkıntı oluştu!", err);
+        }
+    };
+
+    const handleCreate = async () => {
+        if (!editingProject) return;
+
+        const { id, ...newProjectData } = editingProject;
+
+        try {
+            const response = await fetch("http://localhost:3000/projects", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(newProjectData)
+            });
+
+            if (!response.ok) {
+                throw new Error("Proje oluşturulurken bir sorun oluştu.");
+            }
+
+            const newProject: Project = await response.json();
+            setProjects((prev) => [...prev, newProject]);
+        } catch (err) {
+            console.error("Proje oluşturulurken bir sıkıntı oluştu!", err);
+        }
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!editingProject) return;
 
-        const isExisting = projects.some((p) => p.id === editingProject.id);
+        const isExisting = projects.some((p) => String(p.id) === String(editingProject.id));
 
-        try {
-            if (isExisting) {
-                await fetch(`http://localhost:3000/projects/${editingProject.id}`, {
-                    method: "PUT",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(editingProject)
-                });
-            } else {
-                await fetch("http://localhost:3000/projects", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(editingProject)
-                });
-            }
-        } catch (err) {
-            console.error("Proje kaydedilirken bir sıkıntı oluştu!");
+        if (isExisting) {
+            await handleUpdate();
+        } else {
+            await handleCreate();
         }
 
-        setProjects((prev) =>
-            isExisting ? prev.map((p) => (p.id === editingProject.id ? editingProject : p))
-                : [...prev, editingProject]
-        );
         setEditingProject(null);
     };
 
@@ -84,6 +117,12 @@ export const ProjectManagePage = () => {
             finishDate: "",
             status: "Planlama"
         });
+    };
+
+    const handleChange = (e: any) => {
+        const { name, value } = e.target;
+
+        setEditingProject((prev) => prev ? { ...prev, [name]: value } : null);
     };
 
     const getStatusBadge = (status: Project["status"]) => {
@@ -138,9 +177,9 @@ export const ProjectManagePage = () => {
                             viewBox="0 0 24 24"
                             fill="none"
                             stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                             className="lucide lucide-circle-plus-icon lucide-circle-plus">
                             <circle cx="12" cy="12" r="10" />
                             <path d="M8 12h8" />
@@ -188,9 +227,9 @@ export const ProjectManagePage = () => {
                                     viewBox="0 0 24 24"
                                     fill="none"
                                     stroke="currentColor"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
                                     className="lucide lucide-pencil-icon lucide-pencil">
                                     <path d="M12 20h9" />
                                     <path d="M16.5 3.5a2.5 2.5 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
@@ -203,9 +242,9 @@ export const ProjectManagePage = () => {
                                     viewBox="0 0 24 24"
                                     fill="none"
                                     stroke="currentColor"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
                                     className="lucide lucide-trash-2-icon lucide-trash-2">
                                     <path d="M3 6h18" />
                                     <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
@@ -221,7 +260,7 @@ export const ProjectManagePage = () => {
 
             {editingProject && (
                 <div className={styles.modalOverlay}>
-                    <form className={styles.modalContent} onSubmit={handleSave}>
+                    <form className={styles.modalContent} onSubmit={handleSubmit}>
                         <h2 className={styles.modalTitle}>
                             {projects.some((p) => p.id === editingProject.id) ? "Projeyi Düzenle" : "Yeni Proje Ekle"}
                         </h2>
@@ -230,9 +269,10 @@ export const ProjectManagePage = () => {
                             <label>Proje Adı</label>
                             <input
                                 type="text"
+                                name="title"
                                 required
                                 value={editingProject.title}
-                                onChange={(e) => setEditingProject({ ...editingProject, title: e.target.value })}
+                                onChange={handleChange}
                             />
                         </div>
 
@@ -240,8 +280,9 @@ export const ProjectManagePage = () => {
                             <label>Açıklama</label>
                             <textarea
                                 rows={2}
+                                name="description"
                                 value={editingProject.description}
-                                onChange={(e) => setEditingProject({ ...editingProject, description: e.target.value })}
+                                onChange={handleChange}
                             />
                         </div>
 
@@ -249,8 +290,9 @@ export const ProjectManagePage = () => {
                             <label>Sorumlu Kişi</label>
                             <input
                                 type="text"
+                                name="manager"
                                 value={editingProject.manager}
-                                onChange={(e) => setEditingProject({ ...editingProject, manager: e.target.value })}
+                                onChange={handleChange}
                             />
                         </div>
 
@@ -258,8 +300,9 @@ export const ProjectManagePage = () => {
                             <label>Bütçe</label>
                             <input
                                 type="text"
+                                name="budget"
                                 value={editingProject.budget}
-                                onChange={(e) => setEditingProject({ ...editingProject, budget: e.target.value })}
+                                onChange={handleChange}
                             />
                         </div>
 
@@ -268,8 +311,9 @@ export const ProjectManagePage = () => {
                                 <label>Başlangıç Tarihi</label>
                                 <input
                                     type="date"
+                                    name="startDate"
                                     value={editingProject.startDate}
-                                    onChange={(e) => setEditingProject({ ...editingProject, startDate: e.target.value })}
+                                    onChange={handleChange}
                                 />
                             </div>
 
@@ -277,8 +321,9 @@ export const ProjectManagePage = () => {
                                 <label>Teslim Tarihi</label>
                                 <input
                                     type="date"
+                                    name="finishDate"
                                     value={editingProject.finishDate}
-                                    onChange={(e) => setEditingProject({ ...editingProject, finishDate: e.target.value })}
+                                    onChange={handleChange}
                                 />
                             </div>
                         </div>
@@ -286,10 +331,9 @@ export const ProjectManagePage = () => {
                         <div className={styles.formGroup}>
                             <label>Durum</label>
                             <select
+                                name="status"
                                 value={editingProject.status}
-                                onChange={(e) =>
-                                    setEditingProject({ ...editingProject, status: e.target.value as Project["status"] })
-                                }
+                                onChange={handleChange}
                             >
                                 <option value="Planlama">Planlama</option>
                                 <option value="Devam Ediyor">Devam Ediyor</option>
