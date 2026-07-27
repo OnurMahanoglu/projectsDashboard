@@ -3,7 +3,7 @@ import { SidebarItem } from "./SidebarItem.tsx";
 import { renderIcon } from "../../utils/iconMapper.tsx";
 import { SideItem } from "../../types/SideItemProps.ts";
 import styles from "./sidebar.module.css";
-import Logo from "../../assets/trt.png"
+import Logo from "../../assets/trtLogo.webp"
 
 export const Sidebar = () => {
     const [isCollapsed, setIsCollapsed] = useState(false);
@@ -29,10 +29,10 @@ export const Sidebar = () => {
                     }));
                 };
 
-                const sidebarViasibleItems = data.filter((item) => item.showInSidebar !== false);
-                setMenuData(formatMenuItems(sidebarViasibleItems));
+                const sidebarVisibleItems = data.filter((item) => item.showInSidebar !== false);
+                setMenuData(formatMenuItems(sidebarVisibleItems));
             } catch (err) {
-                console.error("Veri alinırken bir hata oluştu!", err);
+                console.error("Veri alınırken bir hata oluştu!", err);
             } finally {
                 setLoading(false);
             }
@@ -44,6 +44,10 @@ export const Sidebar = () => {
     const toggleSidebar = () => {
         setIsCollapsed((prev) => !prev);
     };
+
+    const handleExpand = () => {
+        setIsCollapsed(false);
+    }
 
     return (
         <aside className={`${styles.sidebar} ${isCollapsed ? styles.collapsed : ""}`}>
@@ -102,6 +106,7 @@ export const Sidebar = () => {
                             key={item.id}
                             item={item}
                             isCollapsed={isCollapsed}
+                            onExpand={handleExpand}
                         />
                     ))
                 )}

@@ -8,8 +8,3 @@ export interface SideItem {
     badge?: string | number;
     children?: SideItem[];
 }
-
-export default interface SideItemProps {
-    item: SideItem;
-    isCollapsed: boolean;
-}

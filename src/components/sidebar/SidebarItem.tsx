@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router";
 import styles from "./sidebar.module.css";
-import SideItemProps  from "../../types/SideItemProps.ts";
 
-export const SidebarItem = ({ item, isCollapsed }: SideItemProps) => {
+export const SidebarItem = ({ item, isCollapsed, onExpand }) => {
     const [isOpen, setIsOpen] = useState(false);
     const location = useLocation();
 
@@ -14,9 +13,27 @@ export const SidebarItem = ({ item, isCollapsed }: SideItemProps) => {
             child.path && location.pathname === child.path
     );
 
+    useEffect(() => {
+        const isActiveParent = Boolean(
+            hasChildren && (
+                (item.path && item.path !== "/" && location.pathname.includes(item.path)) ||
+                hasActiveChild
+            )
+        );
+
+        if (isActiveParent) {
+            setIsOpen(true);
+        }
+    }, [hasActiveChild, location.pathname]);
+
     const handleToggle = () => {
-        if (hasChildren && !isCollapsed) {
-            setIsOpen((prev) => !prev);
+        if (hasChildren) {
+            if (isCollapsed) {
+                onExpand?.();
+                setIsOpen(true);
+            } else {
+                setIsOpen((prev) => !prev);
+            }
         }
     };
 
