@@ -1,53 +1,55 @@
 {
-    "routes": [
+  "routes": [
+    {
+      "id": "home",
+      "title": "Anasayfa",
+      "path": "/anasayfa",
+      "iconName": "Home",
+      "showInSidebar": true
+    },
+    {
+      "id": "projects",
+      "title": "Projeler",
+      "path": "/projeler",
+      "iconName": "Projects",
+      "showInSidebar": true,
+      "children": [
         {
-            "id": "home",
-            "title": "Anasayfa",
-            "path": "/",
-            "iconName": "Home",
-            "showInSidebar": true
+          "id": "project-list",
+          "title": "Proje Liste",
+          "path": "/projeler/liste",
+          "showInSidebar": true
         },
         {
-            "id": "projects",
-            "title": "Projeler",
-            "path": "/projeler",
-            "iconName": "Projects",
-            "showInSidebar": true,
-            "children": [
-                {
-                    "id": "project-list",
-                    "title": "Proje Liste",
-                    "path": "/projeler/liste",
-                    "showInSidebar": true
-                },
-                {
-                    "id": "project-manage",
-                    "title": "Proje Yönetimi",
-                    "path": "/projeler/yonetim",
-                    "showInSidebar": true
-                }
-            ]
-        },
-        {
-            "id": "account",
-            "title": "Hesap",
-            "path": "/hesap",
-            "iconName": "Account",
-            "showInSidebar": true,
-            "children": [
-                {
-                    "id": "account-settings",
-                    "title": "Hesap Ayarları",
-                    "path": "/hesap/ayarlar",
-                    "showInSidebar": true
-                },
-                {
-                    "id": "logout",
-                    "title": "Çıkış",
-                    "path": "/cikis",
-                    "showInSidebar": true
-                }
-            ]
+          "id": "project-manage",
+          "title": "Proje Yönetimi",
+          "path": "/projeler/yonetim",
+          "showInSidebar": true
         }
-    ]
+      ]
+    },
+    {
+      "id": "account",
+      "title": "Hesap",
+      "path": "/hesap",
+      "iconName": "Account",
+      "showInSidebar": true,
+      "children": [
+        {
+          "id": "account-settings",
+          "title": "Hesap Ayarları",
+          "path": "/hesap/ayarlar",
+          "showInSidebar": true
+        },
+        {
+          "id": "logout",
+          "title": "Çıkış",
+          "path": "/cikis",
+          "showInSidebar": true
+        }
+      ]
+    }
+  ],
+  "projects": [],
+  "$schema": ["./node_modules/json-server/schema.json"]
 }
