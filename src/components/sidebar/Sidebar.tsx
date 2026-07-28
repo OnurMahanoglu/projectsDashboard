@@ -45,10 +45,6 @@ export const Sidebar = () => {
         setIsCollapsed((prev) => !prev);
     };
 
-    const handleExpand = () => {
-        setIsCollapsed(false);
-    }
-
     return (
         <aside className={`${styles.sidebar} ${isCollapsed ? styles.collapsed : ""}`}>
             <div className={styles.sidebarHeader}>
@@ -106,7 +102,6 @@ export const Sidebar = () => {
                             key={item.id}
                             item={item}
                             isCollapsed={isCollapsed}
-                            onExpand={handleExpand}
                         />
                     ))
                 )}

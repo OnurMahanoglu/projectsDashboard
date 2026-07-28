@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import styles from "./projects.module.css";
 import Project from "../types/projectInterface";
+import { ProjectStatus } from "../enum/ProjectEnum";
 
 export const ProjectManagePage = () => {
     const [projects, setProjects] = useState<Project[]>([]);
     const [searchTerm, setSearchTerm] = useState("");
-    const [editingProject, setEditingProject] = useState<Project | null>(null);
+    const [editingProject, setEditingProject] = useState<Partial<Project> | null>(null);
 
     useEffect(() => {
         const getProjects = async () => {
@@ -115,25 +116,24 @@ export const ProjectManagePage = () => {
             budget: "",
             startDate: "",
             finishDate: "",
-            status: "Planlama"
+            status: ProjectStatus.Planlama
         });
     };
 
     const handleChange = (e: any) => {
         const { name, value } = e.target;
-
         setEditingProject((prev) => prev ? { ...prev, [name]: value } : null);
     };
 
     const getStatusBadge = (status: Project["status"]) => {
-        switch (status) {
-            case "Tamamlandı":
-                return <span className={`${styles.badge} ${styles.badgeCompleted}`}>Tamamlandı</span>;
-            case "Devam Ediyor":
-                return <span className={`${styles.badge} ${styles.badgeActive}`}>Devam Ediyor</span>;
-            default:
-                return <span className={`${styles.badge} ${styles.badgePending}`}>Planlama</span>;
-        }
+        const badgeStyles: Record<ProjectStatus, string> = {
+            [ProjectStatus.Tamamlandi]: styles.badgeCompleted,
+            [ProjectStatus.DevamEdiyor]: styles.badgeActive,
+            [ProjectStatus.Beklemede]: styles.badgePending,
+            [ProjectStatus.Planlama]: styles.badgePlanning
+        };
+
+        return <span className={`${styles.badge} ${badgeStyles[status]}`}>{status}</span>
     };
 
     return (
@@ -271,7 +271,7 @@ export const ProjectManagePage = () => {
                                 type="text"
                                 name="title"
                                 required
-                                value={editingProject.title}
+                                value={editingProject.title || ""}
                                 onChange={handleChange}
                             />
                         </div>
@@ -281,7 +281,7 @@ export const ProjectManagePage = () => {
                             <textarea
                                 rows={2}
                                 name="description"
-                                value={editingProject.description}
+                                value={editingProject.description || ""}
                                 onChange={handleChange}
                             />
                         </div>
@@ -291,7 +291,7 @@ export const ProjectManagePage = () => {
                             <input
                                 type="text"
                                 name="manager"
-                                value={editingProject.manager}
+                                value={editingProject.manager || ""}
                                 onChange={handleChange}
                             />
                         </div>
@@ -301,7 +301,7 @@ export const ProjectManagePage = () => {
                             <input
                                 type="text"
                                 name="budget"
-                                value={editingProject.budget}
+                                value={editingProject.budget || ""}
                                 onChange={handleChange}
                             />
                         </div>
@@ -338,6 +338,7 @@ export const ProjectManagePage = () => {
                                 <option value="Planlama">Planlama</option>
                                 <option value="Devam Ediyor">Devam Ediyor</option>
                                 <option value="Tamamlandı">Tamamlandı</option>
+                                <option value="Beklemede">Beklemede</option>
                             </select>
                         </div>
 

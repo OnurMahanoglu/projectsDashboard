@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import { NavLink, useLocation } from "react-router";
+import { NavLink, useLocation, useNavigate } from "react-router";
 import styles from "./sidebar.module.css";
 
-export const SidebarItem = ({ item, isCollapsed, onExpand }) => {
+export const SidebarItem = ({ item, isCollapsed }) => {
     const [isOpen, setIsOpen] = useState(false);
     const location = useLocation();
+    const navigate = useNavigate();
 
     const hasChildren = Boolean(item.children && item.children.length > 0);
 
@@ -29,8 +30,10 @@ export const SidebarItem = ({ item, isCollapsed, onExpand }) => {
     const handleToggle = () => {
         if (hasChildren) {
             if (isCollapsed) {
-                onExpand?.();
-                setIsOpen(true);
+                const firstChildPath = item.children?.[0]?.path;
+                if (firstChildPath && location.pathname !== firstChildPath) {
+                    navigate(firstChildPath);
+                }
             } else {
                 setIsOpen((prev) => !prev);
             }
