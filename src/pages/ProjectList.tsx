@@ -1,22 +1,9 @@
 import { useEffect, useState } from 'react';
-import type { Project, TableColumn } from '../types/project';
-import { Breadcrumb } from '../components/Breadcrumb';
-import { ProjectTable } from '../components/ProjectTable';
+import type { Project } from '../types/project';
+import { useSearch } from '../context/SearchContext';
 
-const columns: TableColumn[] = [
-  { key: 'id', label: 'KODU' },
-  { key: 'name', label: 'PROJE / BANDROL ADI' },
-  { key: 'startDate', label: 'BAŞLANGIÇ' },
-  { key: 'endDate', label: 'BİTİŞ' },
-  { key: 'status', label: 'DURUM' },
-  { key: 'actions', label: 'İŞLEMLER', align: 'right' },
-];
-
-interface ProjectListProps {
-  searchTerm?: string;
-}
-
-export const ProjectList = ({ searchTerm = '' }: ProjectListProps) => {
+export const ProjectList = () => {
+  const { searchTerm } = useSearch();
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -27,27 +14,24 @@ export const ProjectList = ({ searchTerm = '' }: ProjectListProps) => {
         setProjects(data);
         setLoading(false);
       })
-      .catch((err) => {
-        console.error('Veri çekme hatası:', err);
-        setLoading(false);
-      });
+      .catch((err) => console.error(err));
   }, []);
 
-  const term = searchTerm.trim().toLowerCase();
-  const filteredProjects = projects.filter((project) => {
-    const nameMatch = project.name?.toLowerCase().includes(term);
-    const idMatch = project.id?.toLowerCase().includes(term);
-    return nameMatch || idMatch;
-  });
-
-  if (loading) {
-    return <div style={{ padding: '20px', textAlign: 'center' }}>Yükleniyor...</div>;
-  }
+  const filteredProjects = projects.filter((project) =>
+    project.name?.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
-    <>
-      <Breadcrumb totalCount={filteredProjects.length} />
-      <ProjectTable projects={filteredProjects} columns={columns} />
-    </>
+    <div>
+      {loading ? (
+        <p>Yükleniyor...</p>
+      ) : (
+        <ul>
+          {filteredProjects.map((project) => (
+            <li key={project.id}>{project.name}</li>
+          ))}
+        </ul>
+      )}
+    </div>
   );
 };
