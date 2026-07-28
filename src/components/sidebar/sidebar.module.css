@@ -46,7 +46,7 @@
 }
 
 .logoWrapper {
-    width: 80px;
+    width: 100px;
     height: 30px;
     overflow: hidden;
     display: block;
@@ -203,6 +203,12 @@
     overflow: hidden;
 }
 
+.sidebarSubMenuWrapper:not(.open) .sidebarSubMenu {
+    margin-top: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
 .sidebarSubMenuWrapper.open {
     grid-template-rows: 1fr;
 }
@@ -220,8 +226,8 @@
    5. AKTİF DURUM
    ========================================== */
 .active {
-     background-color: #D2272F;
-    color: #ffffff; 
+    /* background-color: #D2272F;
+    color: #ffffff; */
 }
 
 .active .iconWrapper,

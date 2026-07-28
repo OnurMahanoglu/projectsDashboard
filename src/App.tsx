@@ -14,12 +14,12 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/kayit-ol" element={<RegisterPage />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/giris" element={<LoginPage />} />
         <Route path="/cikis" element={<LogoutPage />} />
         <Route path="/" element={<Home />} />
 
         <Route element={<MainLayout />}>
-          <Route path="/Anasayfa" element={<HomePage />} />
+          <Route path="/anasayfa" element={<HomePage />} />
           <Route path="/projeler/liste" element={<ProjectListPage />} />
           <Route path="/projeler/yonetim" element={<ProjectManagePage />} />
           <Route path="/hesap/ayarlar" element={<AccountSettingsPage />} />

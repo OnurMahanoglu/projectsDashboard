@@ -28,7 +28,7 @@ export const LogoutPage = () => {
                     fontWeight: 600
                 }}
             >
-                Yeniden Giriş Yap / Anasayfa
+                Yeniden Giriş Yap
             </button>
         </div>
     );
