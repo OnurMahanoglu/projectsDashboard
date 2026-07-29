@@ -1,22 +1,18 @@
-import { BrowserRouter } from 'react-router';
-import { Header } from './components/Header';
-import { ProjectListPage } from './pages/ProjectListPage';
+import Header from './components/header/Header';
+import ProjectListPage from './pages/projects/ProjectListPage';
 import { SearchProvider } from './context/SearchContext';
-import './App.css';
+// @ts-ignore
+import styles from './App.module.css';
 
 function App() {
   return (
     <SearchProvider>
-      <BrowserRouter>
-        <div className="app-container">
-          <div className="main-wrapper">
-            <Header />
-            <main className="main-content">
-              <ProjectListPage />
-            </main>
-          </div>
-        </div>
-      </BrowserRouter>
+      <div className={styles.appContainer}>
+        <Header />
+        <main className={styles.mainContent}>
+          <ProjectListPage />
+        </main>
+      </div>
     </SearchProvider>
   );
 }
