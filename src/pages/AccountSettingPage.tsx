@@ -74,9 +74,9 @@ export const AccountSettingsPage = () => {
         })();
 
         const savedAvatar = localStorage.getItem(AVATAR_STORAGE_KEY);
-        if (savedAvatar) {
-            setAvatarPreview(savedAvatar);
-        }
+        // if (savedAvatar) {
+        //     setAvatarPreview(savedAvatar);
+        // }
     }, []);
 
     useEffect(() => {
