@@ -5,6 +5,10 @@ export const getFavoriteIds = (): string[] => {
     return saved ? JSON.parse(saved) : [];
 };
 
+export const setFavoriteIds = (ids: string[]) => {
+    localStorage.setItem("favoriteProjectIds", JSON.stringify(ids));
+};
+
 export const setAutoEditProject = (project: Project) => {
     sessionStorage.setItem("autoEditProject", JSON.stringify(project));
 };

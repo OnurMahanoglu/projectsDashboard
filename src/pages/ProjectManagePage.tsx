@@ -3,7 +3,7 @@ import styles from "./projects.module.css";
 import Project from "../types/projectInterface";
 import { ProjectStatus } from "../enum/ProjectEnum";
 import { Icons } from "../utils/icons";
-import { getFavoriteIds, getAutoEditProject, clearAutoEditProject } from "../utils/storage";
+import { getFavoriteIds, setFavoriteIds, getAutoEditProject, clearAutoEditProject } from "../utils/storage";
 import { getProjects, createProject, updateProject, deleteProject } from "../services/api";
 
 export const ProjectManagePage = () => {
@@ -34,15 +34,12 @@ export const ProjectManagePage = () => {
     const toggleFavorite = (project: Project, e: React.MouseEvent) => {
         e.stopPropagation();
 
-        let updatedFavs: string[];
-        if (favoriteIds.includes(project.id)) {
-            updatedFavs = favoriteIds.filter((id) => id !== project.id);
-        } else {
-            updatedFavs = [...favoriteIds, project.id];
-        }
+        const updatedFavs = favoriteIds.includes(project.id)
+            ? favoriteIds.filter((id) => id !== project.id) :
+            [...favoriteIds, project.id];
 
         setFavoriteIds(updatedFavs);
-        localStorage.setItem("favoriteProjectIds", JSON.stringify(updatedFavs));
+        setFavoriteIds(updatedFavs);
     };
 
     const filteredProjects = projects.filter((p) =>
