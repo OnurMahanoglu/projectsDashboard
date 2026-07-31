@@ -50,6 +50,29 @@
       ]
     }
   ],
-  "projects": [],
+  "projects": [
+    {
+      "id": "p1",
+      "title": "TRT Portal Arayüz Yenileme",
+      "description": "Dashboard ve Sidebar mimarisinin yenilenmesi.",
+      "manager": "Ahmet Yılmaz",
+      "budget": "250.000 TL",
+      "startDate": "01.05.2026",
+      "finishDate": "15.08.2026",
+      "status": "Devam Ediyor",
+      "favorite": true
+    },
+    {
+      "id": "p2",
+      "title": "Mobil Yayın Uygulaması",
+      "description": "iOS ve Android canlı yayın uygulaması.",
+      "manager": "Ayşe Kaya",
+      "budget": "400.000 TL",
+      "startDate": "0012-02-21",
+      "finishDate": "01.06.2026",
+      "status": "Tamamlandı",
+      "favorite": false
+    }
+  ],
   "$schema": "./node_modules/json-server/schema.json"
 }

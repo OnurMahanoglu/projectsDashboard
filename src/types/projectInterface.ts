@@ -1,3 +1,5 @@
+import { ProjectStatus } from "../enum/ProjectEnum";
+
 export default interface Project {
     id: string;
     title: string;
@@ -6,5 +8,6 @@ export default interface Project {
     budget: string;
     startDate: string;
     finishDate: string;
-    status: "Planlama" | "Devam Ediyor" | "Tamamlandı";
+    status: ProjectStatus;
+    favorite?: boolean;
 }

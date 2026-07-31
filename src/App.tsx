@@ -6,7 +6,7 @@ import { AccountSettingsPage } from "./pages/AccountSettingPage";
 import { LogoutPage } from "./pages/login/LogoutPage.tsx";
 import LoginPage from "./pages/login/loginPage";
 import Home from "./pages/home/homePage";
-import { HomePage } from "./pages/MainPage.tsx"
+import { MainPage } from "./pages/MainPage.tsx";
 import RegisterPage from "./pages/login/registerPage.tsx";
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
         <Route path="/" element={<Home />} />
 
         <Route element={<MainLayout />}>
-          <Route path="/anasayfa" element={<HomePage />} />
+          <Route path="/anasayfa" element={<MainPage />} />
           <Route path="/projeler/liste" element={<ProjectListPage />} />
           <Route path="/projeler/yonetim" element={<ProjectManagePage />} />
           <Route path="/hesap/ayarlar" element={<AccountSettingsPage />} />

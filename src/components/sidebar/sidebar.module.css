@@ -15,12 +15,32 @@
     width: 260px;
     transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
+    justify-content: flex-start;
 }
 
-/* DARALTILMIŞ DURUM (90px) */
 .sidebar.collapsed {
     width: 80px;
     padding: 16px 12px;
+}
+
+.homeSidebar {
+    width: 80px;
+    padding: 16px 12px;
+    background-color: #ffffff;
+    border-right: 1px solid #e2e8f0;
+}
+
+.homeSidebar .logoWrapper {
+    width: 50px;
+    height: 20px;
+    margin: 0 auto;
+}
+
+.homeSidebar .logo {
+    height: 20px;
+    opacity: 1;
+    /* Görünür olmasını sağladık */
+    max-width: 100%;
 }
 
 /* ==========================================
@@ -43,6 +63,7 @@
     height: 30px;
     width: auto;
     display: block;
+    object-fit: contain;
 }
 
 .logoWrapper {
@@ -51,7 +72,7 @@
     overflow: hidden;
     display: block;
     opacity: 1;
-    transition: opacity 0.2s ease, width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease-in-out;
 }
 
 .toggleBtn {
@@ -67,7 +88,7 @@
     flex-shrink: 0;
     margin-left: auto;
     margin-right: 0px;
-    transition: margin-right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .toggleBtn:hover {
@@ -258,14 +279,16 @@
 
 .collapsed .logo {
     opacity: 0;
-    max-width: 0px;
-    pointer-events: none;
-    transition: opacity 0.2s ease, max-width 0s linear 0.2s;
 }
 
 .collapsed .logoWrapper {
     width: 0px;
     opacity: 0;
+}
+
+
+.collapsed .SideabrHeader {
+    justify-content: center;
 }
 
 .collapsed .itemTitle,

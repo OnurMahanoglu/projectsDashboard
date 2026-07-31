@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
-import { NavLink, useLocation } from "react-router";
+import { NavLink, useLocation, useNavigate } from "react-router";
+import { Icons } from "../../utils/icons.tsx";
 import styles from "./sidebar.module.css";
 
-export const SidebarItem = ({ item, isCollapsed, onExpand }) => {
+export const SidebarItem = ({ item, isCollapsed }) => {
     const [isOpen, setIsOpen] = useState(false);
     const location = useLocation();
+    const navigate = useNavigate();
 
     const hasChildren = Boolean(item.children && item.children.length > 0);
 
@@ -29,8 +31,10 @@ export const SidebarItem = ({ item, isCollapsed, onExpand }) => {
     const handleToggle = () => {
         if (hasChildren) {
             if (isCollapsed) {
-                onExpand?.();
-                setIsOpen(true);
+                const firstChildPath = item.children?.[0]?.path;
+                if (firstChildPath && location.pathname !== firstChildPath) {
+                    navigate(firstChildPath);
+                }
             } else {
                 setIsOpen((prev) => !prev);
             }
@@ -53,39 +57,9 @@ export const SidebarItem = ({ item, isCollapsed, onExpand }) => {
                         {item.badge && <span className={styles.badge}>{item.badge}</span>}
                         <span className={styles.arrow}>
                             {isOpen ? (
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="18"
-                                    height="18"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    className="lucide-square-arrow-up"
-                                >
-                                    <rect width="18" height="18" x="3" y="3" rx="2" />
-                                    <path d="m16 12-4-4-4 4" />
-                                    <path d="M12 16V8" />
-                                </svg>
+                                <Icons.arrowUp />
                             ) : (
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="18"
-                                    height="18"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    className="lucide-square-arrow-down"
-                                >
-                                    <rect width="18" height="18" x="3" y="3" rx="2" />
-                                    <path d="M12 8v8" />
-                                    <path d="m8 12 4 4 4-4" />
-                                </svg>
+                                <Icons.arrowDown />
                             )}
                         </span>
                     </div>
