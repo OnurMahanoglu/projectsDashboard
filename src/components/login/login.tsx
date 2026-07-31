@@ -1,36 +1,80 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { Mail, Lock, LogIn, ArrowLeft } from "lucide-react";
+import { User, Lock, LogIn, ArrowLeft } from "lucide-react";
 import trtLogo from "../../assets/trtLogo.webp";
+import { KEYCLOAK_URL, KEYCLOAK_REALM, KEYCLOAK_CLIENT_ID } from "../../config/keycloakConfig";
 import styles from "./login.module.css";
 
 function Login() {
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  function handleLogin() {
-    console.log("email:", email);
-    console.log("şifre:", password);
+  async function handleLogin() {
+    setError("");
+
+    if (!username || !password) {
+      setError("Lütfen kullanıcı adı ve şifrenizi girin.");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      const res = await fetch(
+        `${KEYCLOAK_URL}/realms/${KEYCLOAK_REALM}/protocol/openid-connect/token`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams({
+            grant_type: "password",
+            client_id: KEYCLOAK_CLIENT_ID,
+            username: username,
+            password: password,
+          }),
+        }
+      );
+
+      if (!res.ok) {
+        throw new Error("Kullanıcı adı veya şifre hatalı.");
+      }
+
+      const data = await res.json();
+
+      const payload = JSON.parse(atob(data.access_token.split(".")[1]));
+      const roles: string[] = payload.realm_access?.roles ?? [];
+
+      localStorage.setItem("access_token", data.access_token);
+      localStorage.setItem("refresh_token", data.refresh_token);
+      localStorage.setItem("roles", JSON.stringify(roles));
+
+      navigate("/Anasayfa");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Giriş başarısız oldu.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
     <div className={styles.loginCard}>
-
       <img src={trtLogo} alt="TRT" className={styles.loginLogo} />
-
       <h1 className={styles.loginTitle}>Giriş Yap</h1>
 
+      {error && <div className={styles.loginError}>{error}</div>}
+
       <div className={styles.loginField}>
-        <label>Email</label>
+        <label>Kullanıcı Adı</label>
         <div className={styles.inputWithIcon}>
-          <Mail size={18} className={styles.inputIcon} />
+          <User size={18} className={styles.inputIcon} />
           <input
             type="text"
-            placeholder="ad.soyad@trt.net.tr"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            placeholder="kullanici_adi"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
         </div>
       </div>
@@ -50,16 +94,19 @@ function Login() {
 
       <button className={styles.forgotPassword}>Şifremi Unuttum</button>
 
-      <button className={styles.loginSubmit} onClick={handleLogin}>
+      <button className={styles.loginSubmit} onClick={handleLogin} disabled={loading}>
         <LogIn size={18} />
-        Giriş Yap
+        {loading ? "Giriş yapılıyor..." : "Giriş Yap"}
+      </button>
+
+      <button className={styles.loginBack} onClick={() => navigate("/kayit-ol")}>
+        Hesabın yok mu? Kayıt Ol
       </button>
 
       <button className={styles.loginBack} onClick={() => navigate("/")}>
         <ArrowLeft size={16} />
         Ana Sayfaya Dön
       </button>
-
     </div>
   );
 }

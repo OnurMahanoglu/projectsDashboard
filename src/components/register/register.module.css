@@ -1,4 +1,4 @@
-.loginCard {
+.registerCard {
   width: 100%;
   max-width: 380px;
   padding: 40px 32px;
@@ -15,7 +15,7 @@
   box-sizing: border-box;
 }
 
-.loginLogo {
+.registerLogo {
   display: block;
   margin: 0 auto 20px;
   width: 110px;
@@ -24,23 +24,35 @@
   z-index: 1;
 }
 
-.loginTitle {
+.registerTitle {
   font-size: 26px;
   font-weight: bold;
   color: #1a1a1a;
-  margin-bottom: 28px;
+  margin-bottom: 24px;
   text-align: center;
   position: relative;
   z-index: 1;
 }
 
-.loginField {
-  margin-bottom: 20px;
+.registerError {
+  background: #fdecea;
+  color: #c0392b;
+  border: 1px solid #f5c6c0;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  margin-bottom: 18px;
   position: relative;
   z-index: 1;
 }
 
-.loginField label {
+.registerField {
+  margin-bottom: 18px;
+  position: relative;
+  z-index: 1;
+}
+
+.registerField label {
   display: block;
   font-size: 14px;
   font-weight: 600;
@@ -61,7 +73,7 @@
   pointer-events: none;
 }
 
-.loginField input {
+.registerField input {
   width: 100%;
   padding: 12px 14px 12px 42px;
   border: 1.5px solid #e0e0e0;
@@ -74,30 +86,35 @@
   transition: .2s;
 }
 
-.loginField input::placeholder {
+.registerField input::placeholder {
   color: #a0a0a0;
 }
 
-.loginField input:focus {
+.registerField input:focus {
   border-color: #e4002b;
   background: #ffffff;
 }
 
-.forgotPassword {
-  display: block;
-  margin-left: auto;
-  margin-bottom: 20px;
-  background: none;
-  border: none;
-  font-size: 13px;
-  color: #e4002b;
+.roleSelect {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 15px;
+  background: #f7f7f7;
+  color: #1a1a1a;
+  box-sizing: border-box;
+  outline: none;
   cursor: pointer;
-  text-decoration: underline;
-  position: relative;
-  z-index: 1;
+  transition: .2s;
 }
 
-.loginSubmit {
+.roleSelect:focus {
+  border-color: #e4002b;
+  background: #ffffff;
+}
+
+.registerSubmit {
   width: 100%;
   display: flex;
   align-items: center;
@@ -114,13 +131,19 @@
   transition: .2s;
   position: relative;
   z-index: 1;
+  margin-top: 4px;
 }
 
-.loginSubmit:hover {
+.registerSubmit:hover {
   background: #c60025;
 }
 
-.loginBack {
+.registerSubmit:disabled {
+  background: #e79aa9;
+  cursor: not-allowed;
+}
+
+.registerBack {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -137,19 +160,14 @@
   z-index: 1;
 }
 
-.loginBack:hover {
+.registerBack:hover {
   color: #1a1a1a;
   text-decoration: underline;
 }
 
-.loginError {
-  background: #fdecea;
-  color: #c0392b;
-  border: 1px solid #f5c6c0;
-  padding: 10px 14px;
-  border-radius: 10px;
-  font-size: 13px;
-  margin-bottom: 18px;
-  position: relative;
-  z-index: 1;
+.passwordHint {
+  display: block;
+  font-size: 12px;
+  color: #9a9a9a;
+  margin-top: 6px;
 }
