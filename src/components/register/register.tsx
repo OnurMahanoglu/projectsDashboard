@@ -10,6 +10,43 @@ interface KeycloakRole {
   name: string;
 }
 
+function validatePassword(password: string): string | null {
+  if (password.length < 8) {
+    return "Şifre en az 8 karakter olmalı.";
+  }
+  if (!/[A-Z]/.test(password)) {
+    return "Şifre en az 1 büyük harf içermeli.";
+  }
+  if (!/[a-z]/.test(password)) {
+    return "Şifre en az 1 küçük harf içermeli.";
+  }
+  if (!/[0-9]/.test(password)) {
+    return "Şifre en az 1 rakam içermeli.";
+  }
+  return null;
+}
+
+async function getAdminToken(): Promise<string> {
+  const tokenRes = await fetch(
+    `${KEYCLOAK_URL}/realms/master/protocol/openid-connect/token`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        grant_type: "password",
+        client_id: "admin-cli",
+        username: "admin",
+        password: "admin",
+      }),
+    }
+  );
+
+  if (!tokenRes.ok) throw new Error("Admin token alınamadı.");
+
+  const tokenData = await tokenRes.json();
+  return tokenData.access_token as string;
+}
+
 function Register() {
   const navigate = useNavigate();
 
@@ -25,22 +62,7 @@ function Register() {
   useEffect(() => {
     async function fetchRoles() {
       try {
-        const tokenRes = await fetch(
-          `${KEYCLOAK_URL}/realms/master/protocol/openid-connect/token`,
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: new URLSearchParams({
-              grant_type: "password",
-              client_id: "admin-cli",
-              username: "admin",
-              password: "admin",
-            }),
-          }
-        );
-        if (!tokenRes.ok) throw new Error();
-        const tokenData = await tokenRes.json();
-        const adminToken = tokenData.access_token;
+        const adminToken = await getAdminToken();
 
         const rolesRes = await fetch(
           `${KEYCLOAK_URL}/admin/realms/${KEYCLOAK_REALM}/roles`,
@@ -66,10 +88,22 @@ function Register() {
   async function handleRegister() {
     setError("");
 
-    if (!username || !password || !passwordConfirm || !roleName) {
+    if (!username || !email || !password || !passwordConfirm || !roleName) {
       setError("Lütfen tüm zorunlu alanları doldurun.");
       return;
     }
+
+    if (!/^\S+@\S+\.\S+$/.test(email)) {
+      setError("Lütfen geçerli bir e-posta adresi girin.");
+      return;
+    }
+
+    const passwordError = validatePassword(password);
+    if (passwordError) {
+      setError(passwordError);
+      return;
+    }
+
     if (password !== passwordConfirm) {
       setError("Şifreler eşleşmiyor.");
       return;
@@ -78,22 +112,7 @@ function Register() {
     try {
       setLoading(true);
 
-      const tokenRes = await fetch(
-        `${KEYCLOAK_URL}/realms/master/protocol/openid-connect/token`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: new URLSearchParams({
-            grant_type: "password",
-            client_id: "admin-cli",
-            username: "admin",
-            password: "admin",
-          }),
-        }
-      );
-      if (!tokenRes.ok) throw new Error("Admin token alınamadı.");
-      const tokenData = await tokenRes.json();
-      const adminToken = tokenData.access_token;
+      const adminToken = await getAdminToken();
 
       const createRes = await fetch(
         `${KEYCLOAK_URL}/admin/realms/${KEYCLOAK_REALM}/users`,
@@ -105,7 +124,7 @@ function Register() {
           },
           body: JSON.stringify({
             username: username,
-            email: email || undefined,
+            email: email,
             enabled: true,
             emailVerified: true,
             requiredActions: [],
@@ -116,7 +135,10 @@ function Register() {
 
       if (!createRes.ok) {
         if (createRes.status === 409) {
-          throw new Error("Bu kullanıcı adı zaten alınmış.");
+          throw new Error("Bu kullanıcı adı veya e-posta zaten kullanılıyor.");
+        }
+        if (createRes.status === 400) {
+          throw new Error("Şifre, Keycloak güvenlik politikasına uymuyor.");
         }
         throw new Error("Kayıt işlemi başarısız oldu.");
       }
@@ -170,11 +192,11 @@ function Register() {
       </div>
 
       <div className={styles.registerField}>
-        <label>Email (opsiyonel)</label>
+        <label>Email</label>
         <div className={styles.inputWithIcon}>
           <Mail size={18} className={styles.inputIcon} />
           <input
-            type="text"
+            type="email"
             placeholder="ad.soyad@trt.net.tr"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -193,6 +215,9 @@ function Register() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+        <span className={styles.passwordHint}>
+          En az 8 karakter, 1 büyük harf, 1 küçük harf, 1 rakam içermeli.
+        </span>
       </div>
 
       <div className={styles.registerField}>
