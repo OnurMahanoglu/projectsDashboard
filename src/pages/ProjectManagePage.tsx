@@ -3,7 +3,7 @@ import styles from "./projects.module.css";
 import Project from "../types/projectInterface";
 import { ProjectStatus } from "../enum/ProjectEnum";
 import { Icons } from "../utils/icons";
-import { getFavoriteIds, setFavoriteIds, getAutoEditProject, clearAutoEditProject } from "../utils/storage";
+import { getFavoriteIds, setTheFavoriteIds, getAutoEditProject, clearAutoEditProject } from "../utils/storage";
 import { getProjects, createProject, updateProject, deleteProject } from "../services/api";
 
 export const ProjectManagePage = () => {
@@ -39,7 +39,7 @@ export const ProjectManagePage = () => {
             [...favoriteIds, project.id];
 
         setFavoriteIds(updatedFavs);
-        setFavoriteIds(updatedFavs);
+        setTheFavoriteIds(updatedFavs);
     };
 
     const filteredProjects = projects.filter((p) =>

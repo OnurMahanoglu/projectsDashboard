@@ -5,7 +5,7 @@ export const getFavoriteIds = (): string[] => {
     return saved ? JSON.parse(saved) : [];
 };
 
-export const setFavoriteIds = (ids: string[]) => {
+export const setTheFavoriteIds = (ids: string[]) => {
     localStorage.setItem("favoriteProjectIds", JSON.stringify(ids));
 };
 
