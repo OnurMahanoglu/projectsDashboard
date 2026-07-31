@@ -4,7 +4,7 @@ import { ProjectListPage } from "./pages/ProjectListPage.tsx";
 import { ProjectManagePage } from "./pages/ProjectManagePage.tsx";
 import { AccountSettingsPage } from "./pages/AccountSettingPage.tsx";
 import Home from "./pages/home/homePage.tsx";
-import { HomePage } from "./pages/MainPage.tsx";
+import { MainPage } from "./pages/MainPage.tsx";
 import LoginPage from "./pages/login/loginPage.tsx";
 import { LogoutPage } from "./pages/login/LogoutPage.tsx";
 
@@ -15,7 +15,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/giris" element={<LoginPage />} />
         <Route element={<MainLayout />}>
-          <Route path="/anasayfa" element={<HomePage />} />
+          <Route path="/anasayfa" element={<MainPage />} />
           <Route path="/projeler/liste" element={<ProjectListPage />} />
           <Route path="/projeler/yonetim" element={<ProjectManagePage />} />
           <Route path="/hesap/ayarlar" element={<AccountSettingsPage />} />

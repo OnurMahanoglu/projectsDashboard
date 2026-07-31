@@ -9,4 +9,5 @@ export default interface Project {
     startDate: string;
     finishDate: string;
     status: ProjectStatus;
+    favorite?: boolean;
 }

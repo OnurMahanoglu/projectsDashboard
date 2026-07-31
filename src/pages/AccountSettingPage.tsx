@@ -9,7 +9,7 @@ export const AccountSettingsPage = () => {
             <p>Profil bilgilerinizi ve güvenlik ayarlarınızı buradan güncelleyebilirsiniz.</p>
             <br />
             <button onClick={() => navigate("/")}>
-                Anasayfaya Dön
+                Giriş Sayfasına Dön
             </button>
         </div>
     );
