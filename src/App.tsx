@@ -1,19 +1,20 @@
-import Header from './components/header/Header';
-import ProjectListPage from './pages/projects/ProjectListPage';
-import { SearchProvider } from './context/SearchContext';
-// @ts-ignore
-import styles from './App.module.css';
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+
+import LoginPage from "./pages/login/loginPage";
+
+import { MainPage } from "./pages/MainPage";
+import { ProjectManagePage } from "./pages/ProjectManagePage";
 
 function App() {
   return (
-    <SearchProvider>
-      <div className={styles.appContainer}>
-        <Header />
-        <main className={styles.mainContent}>
-          <ProjectListPage />
-        </main>
-      </div>
-    </SearchProvider>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/" element={<MainPage />} />
+        <Route path="/manage" element={<ProjectManagePage />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
