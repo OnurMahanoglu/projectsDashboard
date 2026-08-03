@@ -37,7 +37,7 @@ export const MainPage = () => {
                 setMenuData(formatMenuItems(routesData));
                 const projectsData = await getProjects();
                 const savedFavIds = getFavoriteIds();
-                setFavProjects(projectsData.filter((p: any) => savedFavIds.includes(p.id)));
+                setFavProjects(projectsData.filter((p) => savedFavIds.includes(p.id)));
             } catch (err) {
                 console.error("Verileri alırken bir sıkıntı oluştu: MainPage", err);
             }
@@ -48,7 +48,7 @@ export const MainPage = () => {
                 const data = await getProjects();
                 const savedFavIds = getFavoriteIds();
 
-                const filteredFavs = data.filter((p: any) => savedFavIds.includes(p.id));
+                const filteredFavs = data.filter((p) => savedFavIds.includes(p.id));
                 setFavProjects(filteredFavs);
             } catch (err) {
                 console.error("Favori projeler alınırken hata oluştu", err);
@@ -118,10 +118,8 @@ export const MainPage = () => {
                         }}
                     >
                         <div className={styles.addIconBox}>
-  {/* @ts-ignore */}
-  <Icons.PlusCircle />
-</div>
-
+                            <Icons.PlusCircle />
+                        </div>
                         <span>Proje Kısayolu Ekle</span>
                     </div>
                 </div>

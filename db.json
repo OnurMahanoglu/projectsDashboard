@@ -1,60 +1,78 @@
 {
-  "projects": [
-    { "id": "PRJ-01", "name": "Aroma A Projesi", "startDate": "10 Oca 2026", "endDate": "15 Haz 2026", "status": "Aktif" },
-    { "id": "PRJ-02", "name": "Aroma B Projesi", "startDate": "01 Şub 2026", "endDate": "20 Tem 2026", "status": "Beklemede" },
-    { "id": "PRJ-03", "name": "Beyaz A Bandrolü", "startDate": "05 Mar 2026", "endDate": "10 Ağu 2026", "status": "Aktif" },
-    { "id": "PRJ-04", "name": "Beyaz B Bandrolü", "startDate": "12 Nis 2026", "endDate": "01 Eyl 2026", "status": "Tamamlandı" },
-    { "id": "PRJ-05", "name": "Cihaz Yönetim Paneli", "startDate": "20 May 2026", "endDate": "30 Eki 2026", "status": "Aktif" }
-  ],
-    "routes": [
+  "routes": [
+    {
+      "id": "home",
+      "title": "Anasayfa",
+      "path": "/anasayfa",
+      "iconName": "Home",
+      "showInSidebar": true
+    },
+    {
+      "id": "projects",
+      "title": "Projeler",
+      "path": "/projeler",
+      "iconName": "Projects",
+      "showInSidebar": true,
+      "children": [
         {
-            "id": "home",
-            "title": "Anasayfa",
-            "path": "/",
-            "iconName": "Home",
-            "showInSidebar": true
+          "id": "project-list",
+          "title": "Proje Liste",
+          "path": "/projeler/liste",
+          "showInSidebar": true
         },
         {
-            "id": "projects",
-            "title": "Projeler",
-            "path": "/projeler",
-            "iconName": "Projects",
-            "showInSidebar": true,
-            "children": [
-                {
-                    "id": "project-list",
-                    "title": "Proje Liste",
-                    "path": "/projeler/liste",
-                    "showInSidebar": true
-                },
-                {
-                    "id": "project-manage",
-                    "title": "Proje Yönetimi",
-                    "path": "/projeler/yonetim",
-                    "showInSidebar": true
-                }
-            ]
-        },
-        {
-            "id": "account",
-            "title": "Hesap",
-            "path": "/hesap",
-            "iconName": "Account",
-            "showInSidebar": true,
-            "children": [
-                {
-                    "id": "account-settings",
-                    "title": "Hesap Ayarları",
-                    "path": "/hesap/ayarlar",
-                    "showInSidebar": true
-                },
-                {
-                    "id": "logout",
-                    "title": "Çıkış",
-                    "path": "/cikis",
-                    "showInSidebar": true
-                }
-            ]
+          "id": "project-manage",
+          "title": "Proje Yönetimi",
+          "path": "/projeler/yonetim",
+          "showInSidebar": true
         }
-    ]
+      ]
+    },
+    {
+      "id": "account",
+      "title": "Hesap",
+      "path": "/hesap",
+      "iconName": "Account",
+      "showInSidebar": true,
+      "children": [
+        {
+          "id": "account-settings",
+          "title": "Hesap Ayarları",
+          "path": "/hesap/ayarlar",
+          "showInSidebar": true
+        },
+        {
+          "id": "logout",
+          "title": "Çıkış",
+          "path": "/cikis",
+          "showInSidebar": true
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": "p1",
+      "title": "TRT Portal Arayüz Yenileme",
+      "description": "Dashboard ve Sidebar mimarisinin yenilenmesi.",
+      "manager": "Ahmet Yılmaz",
+      "budget": "250.000 TL",
+      "startDate": "01.05.2026",
+      "finishDate": "15.08.2026",
+      "status": "Devam Ediyor",
+      "favorite": true
+    },
+    {
+      "id": "p2",
+      "title": "Mobil Yayın Uygulaması",
+      "description": "iOS ve Android canlı yayın uygulaması.",
+      "manager": "Ayşe Kaya",
+      "budget": "400.000 TL",
+      "startDate": "0012-02-21",
+      "finishDate": "01.06.2026",
+      "status": "Tamamlandı",
+      "favorite": false
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
