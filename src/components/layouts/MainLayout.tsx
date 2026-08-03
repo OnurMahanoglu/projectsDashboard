@@ -1,18 +1,19 @@
-import { Outlet } from "react-router";
-import { Sidebar } from "../sidebar/Sidebar";
-import { Header } from "../header/Header";
-import styles from "./mainLayout.module.css";
+import React from "react";
+import { Outlet } from "react-router-dom";
+import { Header } from "../header/Header"; // Veya Header dosyan neredeyse (örneğin: "../components/header/Header")
 
 export const MainLayout = () => {
-    return (
-        <div className={styles.layoutContainer}>
-            <Sidebar />
-            <div className={styles.contentWrapper}>
-                <Header />
-                <main className={styles.mainContent}>
-                    <Outlet />
-                </main>
-            </div>
-        </div>
-    );
+  return (
+    <div>
+      {/* Hocanın istediği: Header düzenin (Layout) içinde yer alıyor */}
+      <Header />
+
+      {/* Rotalardan gelen sayfalar buraya yüklenecek */}
+      <main>
+        <Outlet />
+      </main>
+    </div>
+  );
 };
+
+export default MainLayout;
